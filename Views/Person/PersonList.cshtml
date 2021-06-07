@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CRUDWithMysqlAndAspNetCoreMVC.Models.Person>
+
+    @{
+    ViewData["Title"] = "Person List";
+    }
+
+    <p>
+        <a asp-action="AddPerson" class="btn btn-success">Add New Person</a>
+    </p>
+
+    <h2>People's List</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr class="btn-info">
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsPlayer)
+                </th>
+                <th>
+                    Update
+                </th>
+                <th>
+                    Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @item.FirstName
+                    </td>
+                    <td>
+                        @item.LastName
+                    </td>
+                    <td>
+                        @item.Age
+                    </td>
+                    <td>
+                        @(item.IsPlayer ? "Yes" : "No")
+                    </td>
+                    <td>
+                        <a asp-action="UpdatePerson" asp-route-id="@item.Id" class="btn btn-primary">Update</a>
+                    </td>
+                    <td>
+                        <form asp-action="DeletePerson" asp-route-id="@item.Id">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
